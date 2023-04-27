@@ -36,6 +36,5 @@ wf.setframerate(RATE)
 wf.writeframes(b''.join(frames))
 wf.close()
 
-# play the recording back
-import os
-os.system('aplay output.wav')
+
+

@@ -1,9 +1,15 @@
 import speech_recognition as sr
-import nltk
-from nltk.sentiment import SentimentIntensityAnalyzer
 import wave
 from deep_translator import GoogleTranslator
 import json
+import pyaudio
+
+FORMAT = pyaudio.paInt16
+CHANNELS = 1
+RATE = 44100
+CHUNK = 1024
+RECORD_SECONDS = 5
+WAVE_OUTPUT_FILENAME = "signals.wav"
 
 # initialize things
 r = sr.Recognizer()
@@ -17,6 +23,9 @@ with wave.open("recorded_audio.wav", "wb") as wav_file:
     wav_file.setsampwidth(audio.sample_width)
     wav_file.setframerate(audio.sample_rate)
     wav_file.writeframes(audio.get_wav_data())
+# save audio
+with open("recorded_audio.wav", "wb") as f:
+    f.write(audio.get_wav_data())
 # recognize speech
 try:
     with open('signals.json', 'r') as f:
